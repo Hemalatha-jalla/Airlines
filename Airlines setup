@@ -1,0 +1,112 @@
+First create database:
+-->create database Airlines;
+Then:
+-->use Airlines;
+To check whether the database tables are created or not use:
+-->show tables;
+
+NOTE:only after creation of tables the database should shows up 
+
+1.Create tables for airport:
+CREATE TABLE AIRPORT (
+    A_NAME VARCHAR(100),
+    CITY VARCHAR(100),
+    COUNTRY VARCHAR(100),
+    CODE VARCHAR(10) PRIMARY KEY
+);
+
+2.Create tables for passenger:
+CREATE TABLE PASSENGER (
+    P_ID INT PRIMARY KEY,
+    NAME VARCHAR(100),
+    NATIONALITY VARCHAR(50),
+    PASSPORT_NO VARCHAR(20),
+    LANGUAGE_WEIGHT INT
+);
+
+3.Create tables for pilot:
+CREATE TABLE PILOT (
+    PILOT_ID INT PRIMARY KEY,
+    NAME VARCHAR(100),
+    LICENSE_NO VARCHAR(50),
+    AIRLINE_ID VARCHAR(50),
+    MARITAL_STATUS VARCHAR(10),
+    SALARY DECIMAL(10, 2),
+    DEPT VARCHAR(50)
+);
+
+4.Create tables for flight:
+CREATE TABLE FLIGHT (
+    FLIGHT_NO VARCHAR(10) PRIMARY KEY,
+    DEPARTURE_AIRPORT VARCHAR(10),
+    ARRIVAL_TIME DATETIME,
+    TAKEOFF_TIME DATETIME,
+    FLIGHT_TYPE VARCHAR(50),
+    FOREIGN KEY (DEPARTURE_AIRPORT) REFERENCES AIRPORT(CODE)
+);
+
+5.Create tables for ticket:
+CREATE TABLE TICKET (
+    T_NUM INT PRIMARY KEY,
+    PASSENGER_ID INT,
+    SEAT_NUM VARCHAR(10),
+    CLASS VARCHAR(10),
+    PRICE DECIMAL(10, 2),
+    BOOKING_TIME DATETIME,
+    FOREIGN KEY (PASSENGER_ID) REFERENCES PASSENGER(P_ID)
+);
+
+1.Insert data into AIRPORT:
+INSERT INTO AIRPORT (A_NAME, CITY, COUNTRY, CODE) VALUES
+('Heathrow Airport', 'London', 'UK', 'LHR'),
+('JFK International Airport', 'New York', 'USA', 'JFK'),
+('Tokyo Haneda Airport', 'Tokyo', 'Japan', 'HND'),
+('Sydney Airport', 'Sydney', 'Australia', 'SYD'),
+('Dubai International Airport', 'Dubai', 'UAE', 'DXB'),
+('Paris Charles de Gaulle', 'Paris', 'France', 'CDG'),
+('Hong Kong International Airport', 'Hong Kong', 'China', 'HKG'),
+('Los Angeles International Airport', 'Los Angeles', 'USA', 'LAX');
+
+2.Insert data into PASSENGER:
+INSERT INTO PASSENGER (P_ID, NAME, NATIONALITY, PASSPORT_NO, LANGUAGE_WEIGHT) VALUES
+(1, 'John Doe', 'American', 'A12345678', 3),
+(2, 'Jane Smith', 'British', 'B23456789', 2),
+(3, 'Akira Tanaka', 'Japanese', 'C34567890', 4),
+(4, 'Emily Johnson', 'Canadian', 'D45678901', 1),
+(5, 'Omar Khaled', 'Egyptian', 'E56789012', 5),
+(6, 'Sophia Miller', 'Australian', 'F67890123', 2),
+(7, 'Hugo Dubois', 'French', 'G78901234', 3),
+(8, 'Li Wei', 'Chinese', 'H89012345', 4);
+
+3.Insert data into PILOT:
+INSERT INTO PILOT (PILOT_ID, NAME, LICENSE_NO, AIRLINE_ID, MARITAL_STATUS, SALARY, DEPT) VALUES
+(1, 'Captain Smith', 'LIC001', 'AA', 'Married', 75000.00, 'Flight Operations'),
+(2, 'First Officer Brown', 'LIC002', 'AA', 'Single', 60000.00, 'Flight Operations'),
+(3, 'Captain Wang', 'LIC003', 'JAL', 'Married', 80000.00, 'Flight Operations'),
+(4, 'First Officer Lee', 'LIC004', 'JAL', 'Single', 65000.00, 'Flight Operations'),
+(5, 'Captain Johnson', 'LIC005', 'Qantas', 'Married', 78000.00, 'Flight Operations'),
+(6, 'First Officer Davis', 'LIC006', 'Qantas', 'Single', 62000.00, 'Flight Operations'),
+(7, 'Captain Dubois', 'LIC007', 'Air France', 'Married', 77000.00, 'Flight Operations'),
+(8, 'First Officer Martin', 'LIC008', 'Air France', 'Single', 63000.00, 'Flight Operations');
+
+4.Insert data into FLIGHT:
+INSERT INTO FLIGHT (FLIGHT_NO, DEPARTURE_AIRPORT, ARRIVAL_TIME, TAKEOFF_TIME, FLIGHT_TYPE) VALUES
+('AA123', 'JFK', '2024-09-15 12:00:00', '2024-09-15 08:00:00', 'International'),
+('JAL456', 'HND', '2024-09-16 14:00:00', '2024-09-16 10:00:00', 'International'),
+('QF789', 'SYD', '2024-09-17 16:00:00', '2024-09-17 12:00:00', 'International'),
+('AF101', 'CDG', '2024-09-18 18:00:00', '2024-09-18 14:00:00', 'International'),
+('HKG202', 'HKG', '2024-09-19 20:00:00', '2024-09-19 16:00:00', 'International'),
+('LAX303', 'LAX', '2024-09-20 22:00:00', '2024-09-20 18:00:00', 'International'),
+('LHR404', 'LHR', '2024-09-21 23:00:00', '2024-09-21 19:00:00', 'International'),
+('DXB505', 'DXB', '2024-09-22 01:00:00', '2024-09-21 21:00:00', 'International');
+
+5. Insert data into TICKET:
+INSERT INTO TICKET (T_NUM, PASSENGER_ID, SEAT_NUM, CLASS, PRICE, BOOKING_TIME) VALUES
+(1001, 1, '12A', 'Economy', 350.00, '2024-09-01 09:00:00'),
+(1002, 2, '15B', 'Business', 650.00, '2024-09-02 10:00:00'),
+(1003, 3, '20C', 'First', 1200.00, '2024-09-03 11:00:00'),
+(1004, 4, '22D', 'Economy', 300.00, '2024-09-04 12:00:00'),
+(1005, 5, '25E', 'Economy', 330.00, '2024-09-05 13:00:00'),
+(1006, 6, '30F', 'Business', 700.00, '2024-09-06 14:00:00'),
+(1007, 7, '35G', 'First', 1300.00, '2024-09-07 15:00:00'),
+(1008, 8, '40H', 'Economy', 340.00, '2024-09-08 16:00:00');
